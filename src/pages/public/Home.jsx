@@ -3,48 +3,52 @@ import axios from 'axios';
 
 import LoginLayout from './LoginLayout';
 import RegistrationLayout from './RegistrationLayout';
+import LogoutButton from '../../components/buttons/LogoutButton';
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
+const Home = (props) => {
+  // constructor(props) {
+  //   super(props);
 
-    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
-  }
+  //   this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+  //   this.handleLogoutClick = this.handleLogoutClick.bind(this);
+  // }
 
-  handleSuccessfulAuth(data) {
-    this.props.handleLogin(data);
-    this.props.history.push('/dashboard');
-  }
+  const { loggedInStatus } = props.loggedInStatus;
 
-  handleLogoutClick() {
+  const handleSuccessfulAuth = (data) => {
+    props.handleLogin(data);
+    props.history.push('/dashboard');
+  };
+
+  const handleLogoutClick = () => {
     axios
       .delete('http://localhost:3001/logout', { withCredentials: true })
       .then((response) => {
-        this.props.handleLogout();
+        props.handleLogout();
       })
       .catch((error) => {
         console.log('logout error', error);
       });
-  }
+  };
 
-  render() {
-    return (
-      <div className='flex flex-col justify-center h-full align-middle'>
-        <h1 className='text-white text-6xl'>Home</h1>
-        <h2 className='text-white text-4xl'>
-          {' '}
-          Status: {this.props.loggedInStatus}
-        </h2>
-        <button
-          onClick={() => this.handleLogoutClick()}
-          className='bg-gray-100 p-3 rounded-md block'
-        >
-          Logout
-        </button>
-        <RegistrationLayout handleSuccessfulAuth={this.handleSuccessfulAuth} />
-        <LoginLayout handleSuccessfulAuth={this.handleSuccessfulAuth} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className='flex flex-col justify-center h-full align-middle'>
+      <h1 className='text-white text-6xl'>Home</h1>
+      <h2 className='text-white text-4xl'>Status: {props.loggedInStatus}</h2>
+      {/* <LogoutButton
+          handleLogoutClick={this.handleLogoutClick}
+          handleLogout={this.props.handleLogout}
+        /> */}
+      <button
+        onClick={() => handleLogoutClick()}
+        className='bg-gray-100 p-3 rounded-md block'
+      >
+        Logout
+      </button>
+      {/* <RegistrationLayout handleSuccessfulAuth={handleSuccessfulAuth} /> */}
+      <LoginLayout handleSuccessfulAuth={handleSuccessfulAuth} />
+    </div>
+  );
+};
+
+export default Home;
