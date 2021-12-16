@@ -6,6 +6,7 @@ import Nav from './components/Nav';
 import Home from './pages/public/Home';
 import Dashboard from './pages/private/Dashboard';
 import RegistrationLayout from './pages/public/RegistrationLayout';
+import LoginLayout from './pages/public/LoginLayout';
 
 const App = () => {
   const [loggedInStatus, setLoggedInStatus] = useState('NOT_LOGGED_IN');
@@ -75,6 +76,18 @@ const App = () => {
             path={'/signup'}
             render={(props) => (
               <RegistrationLayout
+                {...props}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                loggedInStatus={loggedInStatus}
+              />
+            )}
+          />
+          <Route
+            exact
+            path={'/login'}
+            render={(props) => (
+              <LoginLayout
                 {...props}
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}

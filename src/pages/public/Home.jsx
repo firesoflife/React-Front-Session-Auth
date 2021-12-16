@@ -46,7 +46,7 @@ const Home = (props) => {
         Logout
       </button>
       {/* <RegistrationLayout handleSuccessfulAuth={handleSuccessfulAuth} /> */}
-      <LoginLayout handleSuccessfulAuth={handleSuccessfulAuth} />
+      {/* <LoginLayout handleSuccessfulAuth={handleSuccessfulAuth} /> */}
     </div>
   );
 };

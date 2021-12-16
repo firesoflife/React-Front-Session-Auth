@@ -14,7 +14,7 @@ const Nav = (props) => {
           <Link to={'/signup'}>Sign Up</Link>
         </li>
         <li>
-          <Link to='/'>Login</Link>
+          <Link to='/login'>Login</Link>
         </li>
         <li>
           <LogoutButton handleLogout={props.handleLogout} />
