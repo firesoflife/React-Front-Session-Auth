@@ -44,8 +44,6 @@ const App = () => {
     setUserData(data.user);
   };
 
-  // const { loggedInStatus } = props.loggedInStatus;
-
   const handleSuccessfulAuth = (data) => {
     handleLogin(data);
     history.push('/dashboard');
@@ -65,7 +63,10 @@ const App = () => {
   return (
     <div className='flex flex-col bg-gray-900 h-screen'>
       <Fragment>
-        <Nav handleLogoutClick={handleLogoutClick} />
+        <Nav
+          handleLogoutClick={handleLogoutClick}
+          loggedInStatus={loggedInStatus}
+        />
         <Switch>
           <Route
             exact
