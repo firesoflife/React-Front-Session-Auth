@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect, Fragment } from 'react';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Nav from './components/Nav';
 
@@ -9,6 +9,7 @@ import RegistrationLayout from './pages/public/RegistrationLayout';
 import LoginLayout from './pages/public/LoginLayout';
 
 const App = () => {
+  const history = useHistory();
   const [loggedInStatus, setLoggedInStatus] = useState('NOT_LOGGED_IN');
   const [userData, setUserData] = useState({});
 
@@ -43,10 +44,28 @@ const App = () => {
     setUserData(data.user);
   };
 
+  // const { loggedInStatus } = props.loggedInStatus;
+
+  const handleSuccessfulAuth = (data) => {
+    handleLogin(data);
+    history.push('/dashboard');
+  };
+
+  const handleLogoutClick = () => {
+    axios
+      .delete('http://localhost:3001/logout', { withCredentials: true })
+      .then((response) => {
+        handleLogout();
+      })
+      .catch((error) => {
+        console.log('logout error', error);
+      });
+  };
+
   return (
     <div className='flex flex-col bg-gray-900 h-screen'>
-      <BrowserRouter>
-        <Nav />
+      <Fragment>
+        <Nav handleLogoutClick={handleLogoutClick} />
         <Switch>
           <Route
             exact
@@ -57,6 +76,7 @@ const App = () => {
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
                 loggedInStatus={loggedInStatus}
+                handleSuccessfulAuth={handleSuccessfulAuth}
               />
             )}
           />
@@ -92,11 +112,12 @@ const App = () => {
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
                 loggedInStatus={loggedInStatus}
+                handleSuccessfulAuth={handleSuccessfulAuth}
               />
             )}
           />
         </Switch>
-      </BrowserRouter>
+      </Fragment>
     </div>
   );
 };

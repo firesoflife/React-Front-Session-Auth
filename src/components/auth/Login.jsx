@@ -8,6 +8,8 @@ const LoginForm = (props) => {
     loginErrors: '',
   });
 
+  // const handleSuccessfulAuth = () => {};
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((user) => {

@@ -1,24 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
-import LoginLayout from './LoginLayout';
-import RegistrationLayout from './RegistrationLayout';
 import LogoutButton from '../../components/buttons/LogoutButton';
 
 const Home = (props) => {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
-  //   this.handleLogoutClick = this.handleLogoutClick.bind(this);
-  // }
-
-  const { loggedInStatus } = props.loggedInStatus;
-
-  const handleSuccessfulAuth = (data) => {
-    props.handleLogin(data);
-    props.history.push('/dashboard');
-  };
+  // const { loggedInStatus } = props.loggedInStatus;
 
   const handleLogoutClick = () => {
     axios
@@ -45,8 +31,6 @@ const Home = (props) => {
       >
         Logout
       </button>
-      {/* <RegistrationLayout handleSuccessfulAuth={handleSuccessfulAuth} /> */}
-      {/* <LoginLayout handleSuccessfulAuth={handleSuccessfulAuth} /> */}
     </div>
   );
 };
