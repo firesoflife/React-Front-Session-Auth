@@ -7,6 +7,7 @@ import Home from './pages/public/Home';
 import Dashboard from './pages/private/Dashboard';
 import RegistrationLayout from './pages/public/RegistrationLayout';
 import LoginLayout from './pages/public/LoginLayout';
+import UpdateLayout from './pages/public/UpdateLayout';
 
 const App = () => {
   const history = useHistory();
@@ -37,6 +38,7 @@ const App = () => {
   const handleLogout = () => {
     setLoggedInStatus('NOT_LOGGED_IN');
     setUserData({});
+    history.push('/');
   };
 
   const handleLogin = (data) => {
@@ -61,7 +63,7 @@ const App = () => {
   };
 
   return (
-    <div className='flex flex-col bg-gray-900 h-screen'>
+    <div className=' flex flex-col bg-gray-900 h-full'>
       <Fragment>
         <Nav
           handleLogoutClick={handleLogoutClick}
@@ -89,6 +91,7 @@ const App = () => {
                 {...props}
                 loggedInStatus={loggedInStatus}
                 handleLogout={handleLogin}
+                userData={userData}
               />
             )}
           />
@@ -101,6 +104,7 @@ const App = () => {
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
                 loggedInStatus={loggedInStatus}
+                handleSuccessfulAuth={handleSuccessfulAuth}
               />
             )}
           />
@@ -114,6 +118,20 @@ const App = () => {
                 handleLogout={handleLogout}
                 loggedInStatus={loggedInStatus}
                 handleSuccessfulAuth={handleSuccessfulAuth}
+              />
+            )}
+          />
+          <Route
+            exact
+            path={'/update/:id'}
+            render={(props) => (
+              <UpdateLayout
+                {...props}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                loggedInStatus={loggedInStatus}
+                handleSuccessfulAuth={handleSuccessfulAuth}
+                userData={userData}
               />
             )}
           />

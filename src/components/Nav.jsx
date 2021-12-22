@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import LogoutButton from './buttons/LogoutButton';
 
 const Nav = (props) => {
-  console.log(props.loggedInStatus);
   if (props.loggedInStatus === 'NOT_LOGGED_IN') {
     return (
       <div className='flex px-16 items-center justify-between h-1/6'>
