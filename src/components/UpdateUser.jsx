@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { resources } from '../config/config';
 
-// const navigate = useNavigate();
-
-const UpdateUser = ({ user, handleSuccessfulAuth, userData, history }) => {
+const UpdateUser = ({ user, handleSuccessfulAuth, userData }) => {
   const [updateUserData, setUpdateUserData] = useState({
     email: '',
     password: '',
@@ -22,6 +20,8 @@ const UpdateUser = ({ user, handleSuccessfulAuth, userData, history }) => {
     });
     e.preventDefault();
   };
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     const { email, password } = updateUserData;
@@ -45,8 +45,7 @@ const UpdateUser = ({ user, handleSuccessfulAuth, userData, history }) => {
         if (response.data.logged_in) {
           handleSuccessfulAuth(response.data);
         } else {
-          history.push('/login');
-          // navigate('/login');
+          navigate('/login');
         }
       })
       .catch((error) => {

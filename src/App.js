@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Nav from './components/Nav';
 
@@ -10,7 +10,7 @@ import LoginLayout from './pages/public/LoginLayout';
 import UpdateLayout from './pages/public/UpdateLayout';
 
 const App = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [loggedInStatus, setLoggedInStatus] = useState('NOT_LOGGED_IN');
   const [userData, setUserData] = useState({});
 
@@ -38,7 +38,7 @@ const App = () => {
   const handleLogout = () => {
     setLoggedInStatus('NOT_LOGGED_IN');
     setUserData({});
-    history.push('/');
+    navigate('/');
   };
 
   const handleLogin = (data) => {
@@ -48,7 +48,7 @@ const App = () => {
 
   const handleSuccessfulAuth = (data) => {
     handleLogin(data);
-    history.push('/dashboard');
+    navigate('/dashboard');
   };
 
   const handleLogoutClick = () => {
@@ -69,73 +69,68 @@ const App = () => {
           handleLogoutClick={handleLogoutClick}
           loggedInStatus={loggedInStatus}
         />
-        <Switch>
+        <Routes>
           <Route
             exact
             path={'/'}
-            render={(props) => (
+            element={
               <Home
-                {...props}
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
                 loggedInStatus={loggedInStatus}
                 handleSuccessfulAuth={handleSuccessfulAuth}
               />
-            )}
+            }
           />
           <Route
             exact
             path={'/dashboard'}
-            render={(props) => (
+            element={
               <Dashboard
-                {...props}
                 loggedInStatus={loggedInStatus}
                 handleLogout={handleLogin}
                 userData={userData}
               />
-            )}
+            }
           />
           <Route
             exact
             path={'/signup'}
-            render={(props) => (
+            element={
               <RegistrationLayout
-                {...props}
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
                 loggedInStatus={loggedInStatus}
                 handleSuccessfulAuth={handleSuccessfulAuth}
               />
-            )}
+            }
           />
           <Route
             exact
             path={'/login'}
-            render={(props) => (
+            element={
               <LoginLayout
-                {...props}
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
                 loggedInStatus={loggedInStatus}
                 handleSuccessfulAuth={handleSuccessfulAuth}
               />
-            )}
+            }
           />
           <Route
             exact
-            path={'/update/:id'}
-            render={(props) => (
+            element={'/update/:id'}
+            render={
               <UpdateLayout
-                {...props}
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
                 loggedInStatus={loggedInStatus}
                 handleSuccessfulAuth={handleSuccessfulAuth}
                 userData={userData}
               />
-            )}
+            }
           />
-        </Switch>
+        </Routes>
       </Fragment>
     </div>
   );
