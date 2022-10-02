@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { resources } from '../../config/config';
 
 const Registrations = (props) => {
   const [userData, setUserData] = useState({
@@ -24,9 +25,11 @@ const Registrations = (props) => {
   const handleSubmit = (e) => {
     const { username, email, password, password_confirmation } = userData;
 
+    const { url } = resources;
+
     axios
       .post(
-        'http://localhost:3000/registrations',
+        `${url}/registrations`,
         {
           user: {
             username: username,

@@ -12,7 +12,6 @@ const UpdateLayout = (props) => {
         handleSuccessfulAuth={props.handleSuccessfulAuth}
         handleLogin={props.handleLogin}
         handleLogout={props.handleLogout}
-        // updateUserData={props.updatUserData}
         userData={props.userData}
       />
     </div>

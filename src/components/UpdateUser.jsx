@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { resources } from '../config/config';
 
 const UpdateUser = (props) => {
   const [updateUserData, setUpdateUserData] = useState({
@@ -7,8 +8,6 @@ const UpdateUser = (props) => {
     password: '',
     loginErrors: '',
   });
-
-  // const handleSuccessfulAuth = () => {};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,9 +26,11 @@ const UpdateUser = (props) => {
     const id = props.user.id;
     console.log(props);
 
+    const { url } = resources;
+
     axios
       .put(
-        `http://localhost:3001/update/${id}`,
+        `${url}/update/${id}`,
         {
           user: {
             email: email,

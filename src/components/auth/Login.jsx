@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { resources } from '../../config/config';
 
 const LoginForm = (props) => {
   const [userData, setUserData] = useState({
@@ -7,8 +8,6 @@ const LoginForm = (props) => {
     password: '',
     loginErrors: '',
   });
-
-  // const handleSuccessfulAuth = () => {};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,27 +23,11 @@ const LoginForm = (props) => {
   const handleSubmit = (e) => {
     const { email, password } = userData;
 
+    const { url } = resources;
+
     axios
       .post(
-        'http://localhost:3000/sessions',
-        //       {
-        //         user: {
-        //           email: email,
-        //           password: password,
-        //         },
-        //       },
-        //       { withCredentials: true }
-        //     )
-        //     .then((response) => {
-        //       if (response.data.logged_in) {
-        //         props.handleSuccessfulAuth(response.data);
-        //       }
-        //     })
-        //     .catch((error) => {
-        //       console.log('login error', error);
-        //     });
-        //   e.preventDefault();
-        // };
+        `${url}/sessions`,
         {
           user: {
             email: email,

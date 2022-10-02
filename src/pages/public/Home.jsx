@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import { resources } from '../../config/config';
 
-import LogoutButton from '../../components/buttons/LogoutButton';
+const { url } = resources;
 
 const Home = (props) => {
   const handleLogoutClick = () => {
     axios
-      .delete('http://localhost:3001/logout', { withCredentials: true })
+      .delete(`${url}/logout`, { withCredentials: true })
       .then((response) => {
         props.handleLogout();
       })
