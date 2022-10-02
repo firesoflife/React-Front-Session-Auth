@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LogoutButton from './buttons/LogoutButton';
 
-const Nav = (props) => {
-  if (props.loggedInStatus === 'NOT_LOGGED_IN') {
+const Nav = ({ loggedInStatus, handleLogout, handleLogoutClick }) => {
+  if (loggedInStatus === 'NOT_LOGGED_IN') {
     return (
       <div className='flex px-16 items-center justify-between h-1/6'>
         <Link to='/'>
@@ -39,8 +39,8 @@ const Nav = (props) => {
         <ul>
           <li>
             <LogoutButton
-              handleLogout={props.handleLogout}
-              handleLogoutClick={props.handleLogoutClick}
+              handleLogout={handleLogout}
+              handleLogoutClick={handleLogoutClick}
             />
           </li>
         </ul>

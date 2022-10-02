@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { resources } from '../config/config';
 
-const UpdateUser = (props) => {
+// const navigate = useNavigate();
+
+const UpdateUser = ({ user, handleSuccessfulAuth, userData, history }) => {
   const [updateUserData, setUpdateUserData] = useState({
     email: '',
     password: '',
@@ -23,8 +26,7 @@ const UpdateUser = (props) => {
   const handleSubmit = (e) => {
     const { email, password } = updateUserData;
 
-    const id = props.user.id;
-    console.log(props);
+    const id = user.id;
 
     const { url } = resources;
 
@@ -41,9 +43,10 @@ const UpdateUser = (props) => {
       )
       .then((response) => {
         if (response.data.logged_in) {
-          props.handleSuccessfulAuth(response.data);
+          handleSuccessfulAuth(response.data);
         } else {
-          props.history.push('/login');
+          history.push('/login');
+          // navigate('/login');
         }
       })
       .catch((error) => {
@@ -52,12 +55,12 @@ const UpdateUser = (props) => {
     e.preventDefault();
   };
 
-  console.log(props.userData);
+  console.log(userData);
 
   return (
     <div>
       <h2 className='text-white text-4xl'>
-        You are editing the details for: {props.userData.email}
+        You are editing the details for: {userData.email}
       </h2>
       <form onSubmit={handleSubmit} className='mt-5'>
         <input

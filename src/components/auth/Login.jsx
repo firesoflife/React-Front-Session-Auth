@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { resources } from '../../config/config';
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSuccessfulAuth }) => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -39,7 +39,7 @@ const LoginForm = (props) => {
       .then((response) => {
         console.log('response from LOGIN', response.data);
         if (response.data.status === 'created') {
-          props.handleSuccessfulAuth(response.data);
+          handleSuccessfulAuth(response.data);
         }
       })
       .catch((error) => {

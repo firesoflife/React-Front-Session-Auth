@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { resources } from '../../config/config';
 
-const Registrations = (props) => {
+const Registrations = ({ handleSuccessfulAuth }) => {
   const [userData, setUserData] = useState({
     username: '',
     email: '',
@@ -43,7 +43,7 @@ const Registrations = (props) => {
       .then((resp) => {
         if (resp.data.status === 'created') {
           console.log(resp.data);
-          props.handleSuccessfulAuth(resp.data);
+          handleSuccessfulAuth(resp.data);
         }
       })
       .catch((error) => {
