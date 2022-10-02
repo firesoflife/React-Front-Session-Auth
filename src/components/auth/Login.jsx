@@ -26,7 +26,25 @@ const LoginForm = (props) => {
 
     axios
       .post(
-        'http://localhost:3001/sessions',
+        'http://localhost:3000/sessions',
+        //       {
+        //         user: {
+        //           email: email,
+        //           password: password,
+        //         },
+        //       },
+        //       { withCredentials: true }
+        //     )
+        //     .then((response) => {
+        //       if (response.data.logged_in) {
+        //         props.handleSuccessfulAuth(response.data);
+        //       }
+        //     })
+        //     .catch((error) => {
+        //       console.log('login error', error);
+        //     });
+        //   e.preventDefault();
+        // };
         {
           user: {
             email: email,
@@ -36,7 +54,8 @@ const LoginForm = (props) => {
         { withCredentials: true }
       )
       .then((response) => {
-        if (response.data.logged_in) {
+        console.log('response from LOGIN', response.data);
+        if (response.data.status === 'created') {
           props.handleSuccessfulAuth(response.data);
         }
       })

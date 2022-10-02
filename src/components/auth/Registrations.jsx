@@ -26,7 +26,7 @@ const Registrations = (props) => {
 
     axios
       .post(
-        'http://localhost:3001/registrations',
+        'http://localhost:3000/registrations',
         {
           user: {
             username: username,

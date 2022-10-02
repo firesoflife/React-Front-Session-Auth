@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/logged_in', { withCredentials: true })
+      .get('http://localhost:3000/logged_in', { withCredentials: true })
       .then((response) => {
         console.log('resp from server', response);
         if (response.data.logged_in && loggedInStatus === 'NOT_LOGGED_IN') {
@@ -33,7 +33,7 @@ const App = () => {
       .catch((error) => {
         console.log('check login error', error);
       });
-  }, []);
+  }, [loggedInStatus]);
 
   const handleLogout = () => {
     setLoggedInStatus('NOT_LOGGED_IN');
@@ -53,7 +53,7 @@ const App = () => {
 
   const handleLogoutClick = () => {
     axios
-      .delete('http://localhost:3001/logout', { withCredentials: true })
+      .delete('http://localhost:3000/logout', { withCredentials: true })
       .then((response) => {
         handleLogout();
       })
