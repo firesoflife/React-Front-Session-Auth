@@ -1,13 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-
+// import { useRef } from 'react';
 const Dashboard = ({ loggedInStatus, userData }) => {
   const user = userData;
 
-  const navigate = useNavigate();
+  // const loggedIn = useRef(loggedInStatus);
 
-  if (loggedInStatus === 'NOT_LOGGED_IN') {
-    navigate('/login');
-  }
+  // console.log('THE LOGIN STATUS IS', loggedIn);
 
   return (
     <div>

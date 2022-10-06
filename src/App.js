@@ -8,6 +8,7 @@ import Dashboard from './pages/private/Dashboard';
 import RegistrationLayout from './pages/public/RegistrationLayout';
 import LoginLayout from './pages/public/LoginLayout';
 import UpdateLayout from './pages/public/UpdateLayout';
+import Protected from './config/Protected';
 
 const App = () => {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ const App = () => {
     axios
       .get('http://localhost:3000/logged_in', { withCredentials: true })
       .then((response) => {
-        console.log('resp from server', response);
         if (response.data.logged_in && loggedInStatus === 'NOT_LOGGED_IN') {
           setLoggedInStatus('LOGGED_IN');
           setUserData(response.data.user);
@@ -36,9 +36,9 @@ const App = () => {
   }, [loggedInStatus]);
 
   const handleLogout = () => {
+    navigate('/');
     setLoggedInStatus('NOT_LOGGED_IN');
     setUserData({});
-    navigate('/');
   };
 
   const handleLogin = (data) => {
@@ -82,17 +82,21 @@ const App = () => {
               />
             }
           />
+
           <Route
             exact
             path={'/dashboard'}
             element={
+              // <Protected loggedInStatus={loggedInStatus}>
               <Dashboard
-                loggedInStatus={loggedInStatus}
+                // loggedInStatus={loggedInStatus}
                 handleLogout={handleLogin}
                 userData={userData}
               />
+              // </Protected>
             }
           />
+
           <Route
             exact
             path={'/signup'}
